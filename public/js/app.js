@@ -402,7 +402,7 @@ function drawLink(fromElement, toElement, linkId, colorIndex = 0, bubbleOffset =
     const bubbleCenterY = 0.25 * y1 + 0.5 * controlY + 0.25 * y2;
 
     // Posicionar el globo en el punto medio de la curva con offset horizontal
-    const bubbleX = bubbleCenterX - 20 + (bubbleOffset * 45);
+    const bubbleX = bubbleCenterX - 20 + (bubbleOffset * 15);
     const bubbleY = bubbleCenterY - 20;
 
     const bubble = document.createElement('div');
