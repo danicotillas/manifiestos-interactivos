@@ -407,6 +407,7 @@ function drawLink(fromElement, toElement, linkId, colorIndex = 0, bubbleOffset =
 
     const bubble = document.createElement('div');
     bubble.className = 'comment-bubble';
+    bubble.textContent = '●';
     bubble.style.left = bubbleX + 'px';
     bubble.style.top = bubbleY + 'px';
     bubble.style.borderColor = color;

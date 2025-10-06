@@ -191,28 +191,6 @@ body {
     font-size: 1.2rem;
     z-index: 100;
     pointer-events: all;
-    position: relative;
-}
-
-.comment-bubble::before {
-    content: '';
-    display: block;
-    width: 20px;
-    height: 16px;
-    background: currentColor;
-    border-radius: 10px 10px 10px 2px;
-    position: relative;
-}
-
-.comment-bubble::after {
-    content: '';
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: currentColor;
-    border-radius: 50%;
-    bottom: 8px;
-    left: 10px;
 }
 
 .comment-bubble:hover {
