@@ -375,3 +375,13 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+/* Asegurar que Hypothesis.is quede visible */
+.hypothesis-frame,
+.hypothesis-sidebar,
+.hypothesis-adder,
+.annotator-frame,
+hypothesis-sidebar,
+hypothesis-adder {
+    z-index: 2147483647 !important;
+}
