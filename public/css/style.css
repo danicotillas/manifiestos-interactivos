@@ -1,0 +1,377 @@
+@import url('https://fonts.googleapis.com/css2?family=Tomorrow:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+/* Navbar */
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid #e0e0e0;
+    z-index: 1000;
+    padding: 1rem 2rem;
+}
+
+.nav-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+#nav-controls {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+#navbar h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #333;
+}
+
+#user-section {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+#username-display {
+    color: #666;
+    font-weight: 500;
+}
+
+/* Instrucciones */
+#instructions {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 999;
+    text-align: center;
+}
+
+#instructions p {
+    margin: 0.25rem 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Canvas Infinito */
+#infinite-canvas {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: grab;
+    overflow: hidden;
+}
+
+#infinite-canvas.panning {
+    cursor: grabbing;
+}
+
+/* Documentos */
+.document {
+    position: absolute;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 2rem;
+    width: 30vw;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    z-index: 1;
+    font-family: 'Tomorrow', sans-serif;
+}
+
+.document h2 {
+    margin-bottom: 1rem;
+    color: #333;
+    font-weight: 600;
+    font-size: 1.8rem;
+    font-family: 'Tomorrow', sans-serif;
+}
+
+#doc1 {
+    top: 100px;
+    left: 200px;
+}
+
+#doc2 {
+    top: 100px;
+    right: 200px;
+}
+
+.document-content {
+    width: 100%;
+    border: none;
+    font-family: 'Tomorrow', sans-serif !important;
+}
+
+.document-content p,
+.document-content font,
+.document-content span {
+    font-family: 'Tomorrow', sans-serif !important;
+}
+
+/* Párrafos seleccionables */
+.selectable-paragraph {
+    cursor: pointer;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.selectable-paragraph:hover {
+    background: #f5f5f5;
+}
+
+.selectable-paragraph.selected {
+    background: #e3f2fd !important;
+    border-left: 3px solid #4a90e2 !important;
+}
+
+/* SVG para líneas */
+#links-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    overflow: visible;
+}
+
+.link-line {
+    stroke-width: 2;
+    fill: none;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.link-line:hover {
+    stroke-width: 3;
+}
+
+/* Globos de comentarios */
+.comment-bubble {
+    position: absolute;
+    background: white;
+    border: 2px solid #4a90e2;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    font-size: 1.2rem;
+    z-index: 100;
+    pointer-events: all;
+}
+
+.comment-bubble:hover {
+    transform: scale(1.1);
+    background: #e3f2fd;
+}
+
+/* Botones */
+.btn {
+    background: #4a90e2;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.btn:hover {
+    background: #2171d6;
+}
+
+.btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background: #666;
+}
+
+.btn-secondary:hover {
+    background: #444;
+}
+
+.btn-delete {
+    background: #d32f2f;
+}
+
+.btn-delete:hover {
+    background: #b71c1c;
+}
+
+/* Modales */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #999;
+}
+
+.close:hover {
+    color: #333;
+}
+
+.modal-content h2 {
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.modal-content input,
+.modal-content textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.modal-content textarea {
+    min-height: 100px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.form-message {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.form-message.error {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.form-message.success {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+/* Sección de comentarios */
+#link-comments-section {
+    margin-top: 2rem;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 1rem;
+}
+
+#link-comments-section h3 {
+    margin-bottom: 1rem;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.comment {
+    background: #f5f5f5;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 6px;
+    border-left: 3px solid #4a90e2;
+}
+
+.comment-author {
+    font-weight: 600;
+    color: #4a90e2;
+    margin-bottom: 0.5rem;
+}
+
+.comment-text {
+    color: #333;
+    line-height: 1.5;
+}
+
+.comment-date {
+    font-size: 0.8rem;
+    color: #999;
+    margin-top: 0.5rem;
+}
+
+.reply-comment {
+    margin-left: 2rem;
+    border-left-color: #90caf9;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

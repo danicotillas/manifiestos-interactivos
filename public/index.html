@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manifiestos Interactivos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Hypothesis.is para anotaciones -->
+    <script async src="https://hypothes.is/embed.js"></script>
+</head>
+<body>
+    <!-- Barra de navegación superior -->
+    <nav id="navbar">
+        <div class="nav-content">
+            <h1>Manifiestos Interactivos</h1>
+            <div id="nav-controls">
+                <button id="toggle-links-btn" class="btn btn-secondary">👁️ Ocultar Conexiones</button>
+            </div>
+            <div id="user-section">
+                <button id="login-btn" class="btn">Admin</button>
+                <div id="user-info" style="display: none;">
+                    <span id="username-display"></span>
+                    <button id="pending-btn" class="btn" style="display: none;">Ver Pendientes (<span id="pending-count">0</span>)</button>
+                    <button id="logout-btn" class="btn">Cerrar Sesión</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Instrucciones -->
+    <div id="instructions">
+        <p><strong>Arrastra fuera de los manifiestos</strong> para navegar por el espacio</p>
+        <p>Haz clic en un párrafo del Manifiesto 1 y luego en uno del Manifiesto 2 para vincularlos</p>
+    </div>
+
+    <!-- Canvas infinito -->
+    <div id="infinite-canvas">
+        <!-- Documento 1 -->
+        <div class="document" id="doc1" data-doc="manifiesto1">
+            <h2>Manifiesto 1</h2>
+            <div class="document-content" id="content1"></div>
+        </div>
+
+        <!-- Documento 2 -->
+        <div class="document" id="doc2" data-doc="manifiesto2">
+            <h2>Manifiesto 2</h2>
+            <div class="document-content" id="content2"></div>
+        </div>
+
+        <!-- SVG para líneas de vinculación -->
+        <svg id="links-svg">
+            <defs>
+                <marker id="arrowhead-0" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#4a90e2" />
+                </marker>
+                <marker id="arrowhead-1" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#e2674a" />
+                </marker>
+                <marker id="arrowhead-2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#4ae28f" />
+                </marker>
+                <marker id="arrowhead-3" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#e2c74a" />
+                </marker>
+                <marker id="arrowhead-4" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#9b4ae2" />
+                </marker>
+                <marker id="arrowhead-5" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#e24a9b" />
+                </marker>
+                <marker id="arrowhead-6" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#4ae2e2" />
+                </marker>
+                <marker id="arrowhead-7" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#e2a34a" />
+                </marker>
+            </defs>
+        </svg>
+    </div>
+
+    <!-- Modal de Login Admin -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" data-modal="login-modal">&times;</span>
+            <h2>Acceso Admin</h2>
+            <form id="login-form">
+                <input type="password" id="login-password" placeholder="Contraseña" required>
+                <button type="submit" class="btn">Entrar</button>
+            </form>
+            <p class="form-message" id="login-message"></p>
+        </div>
+    </div>
+
+    <!-- Modal de Comentario en Vinculación -->
+    <div id="link-comment-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" data-modal="link-comment-modal">&times;</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2 style="margin: 0;">Comentar Vinculación</h2>
+                <button id="delete-link-btn" class="btn btn-delete" style="display: none;">🗑️ Eliminar Vinculación</button>
+            </div>
+            <input type="text" id="comment-author-name" placeholder="Tu nombre" required>
+            <textarea id="link-comment-text" placeholder="Escribe tu comentario sobre esta vinculación..."></textarea>
+            <button id="submit-link-comment" class="btn">Enviar Comentario</button>
+            <p class="form-message" id="comment-message"></p>
+
+            <div id="link-comments-section">
+                <h3>Comentarios Aprobados:</h3>
+                <div id="link-comments-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Comentarios Pendientes (Solo Admin) -->
+    <div id="pending-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" data-modal="pending-modal">&times;</span>
+            <h2>Comentarios Pendientes de Aprobación</h2>
+            <div id="pending-comments-list"></div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
